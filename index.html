@@ -3,4 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Ruang Aksara </title>
+    <title>Ruang Aksara | Cyber-Library</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a12;
+            color: #00f3ff;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(10, 10, 18, 0.9), rgba(10, 10, 18, 0.9)),
+                radial-gradient(#ff0055 1px, transparent 0),
+                radial-gradient(#00f3ff 1px, transparent 0);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            background-position: 0 0, 0 0, 20px 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            border-bottom: 2px solid #ff0055;
+            box-shadow: 0 0 15px #ff0055;
+            background: rgba(10, 10, 18, 0.9);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+        }
+
+        .logo span {
+            color: #ff0055;
+            text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
+        }
+
+        nav a {
+            color: #00f3ff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff0055;
+            text-shadow: 0 0 10px #ff0055;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 20px #ff0055;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #00f3ff;
+            text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        /* Cyber Button */
+        .btn-cyber {
+            padding: 12px 30px;
+            border: 2px solid #00f3ff;
+            background: transparent;
+            color: #00f3ff;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            transition: 0.3s;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .btn-cyber:hover {
+            background: #00f3ff;
+            color: #0a0a12;
+            box-shadow: 0 0 25px #00f3ff;
+        }
+
+        /* Main Content / Book Feed */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            border-left: 5px solid #ff0055;
+            padding-left: 15px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #00f3ff;
+        }
+
+        .grid-books {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        /* Cyber Card */
+        .card {
+            background: rgba(20, 20, 35, 0.8);
+            border: 1px solid #00f3ff;
+            padding: 20px;
+            border-radius: 0;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ff0055;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
+        }
+
+        .card::before {
+            content: 'DATA-LOG';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #0a0a12;
+            padding: 0 5px;
+            font-size: 0.7rem;
+            color: #ff0055;
+            letter-spacing: 1px;
+        }
+
+        .card h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: #8892b0;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid;
+        }
+
+        .available {
+            color: #00ff66;
+            border-color: #00ff66;
+            background: rgba(0, 255, 102, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(0, 243, 255, 0.3);
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: #8892b0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <div class="logo">Ruang<span>Aksara</span></div>
+        <nav>
+            <a href="#home">Beranda</a>
+            <a href="#arsip">Arsip Data</a>
+            <a href="#Kategori">Kategori</a>
+            <a href="#terminal">Terminal</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>RUANG AKSARA</h1>
+        <p>Selamat datang di repositori data masa depan. Tempat pelarian informasi, distopia literasi, dan enkripsi pengetahuan terlengkap di Cyber-City.</p>
+        <button class="btn-cyber">Akses Dek Penejelajah</button>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2 class="section-title">Transmisi Data Terbaru</h2>
+        
+        <div class="grid-books">
+            <!-- Card 1 -->
+            <div class="card">
+                <h3>Neuromancer 2077</h3>
+                <p>Kisah tentang peretas konsol usang yang mencoba menembus pertahanan kecerdasan buatan korporasi raksasa.</p>
+                <span class="status available">Tersedia untuk diunduh</span>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <h3>Etika AI & Perang Siber</h3>
+                <p>Manifesto digital mengenai batas-batas kesadaran sintetis dalam sistem persenjataan militer otomatis.</p>
+                <span class="status available">Tersedia untuk diunduh</span>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <h3>Arsitektur Neon Grid</h3>
+                <p>Panduan teknis membangun jaringan virtual terenkripsi agar terhindar dari pemindaian polisi siber.</p>
+                <span class="status available">Tersedia untuk diunduh</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 RUANG AKSARA // Jaringan Informasi Terenkripsi. Hak Cipta Dilindungi Korporasi.</p>
+    </footer>
+
+</body>
+</html>
