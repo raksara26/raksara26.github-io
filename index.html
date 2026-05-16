@@ -2,10 +2,367 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Website Pertamaku</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Aksara</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --accent-color: #00d4ff; 
+            --text-main: #ffffff;
+            --text-dim: #b3b3b3;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(15, 15, 15, 0.95);
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--card-bg);
+            height: 90px;
+            transition: 0.3s;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 12px; 
+        }
+
+        .nav-btn, .dropbtn, .btn-login {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 18px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            font-family: inherit;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .nav-btn:hover, .btn-login:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 15px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--card-bg);
+            min-width: 200px;
+            box-shadow: 0px 15px 35px rgba(0,0,0,0.8);
+            z-index: 1001;
+            top: calc(100% + 10px);
+            left: 0;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown:hover .dropbtn {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        }
+
+        .dropdown-content a {
+            color: var(--text-main);
+            padding: 14px 20px;
+            display: block;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.2s;
+            border-left: 0px solid var(--accent-color);
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(0, 212, 255, 0.1);
+            color: var(--accent-color);
+            padding-left: 25px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .hero {
+            padding: 100px 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-grow: 1;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem); 
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            min-height: 1.1em;
+        }
+        
+        .hero span {
+            color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 5%;
+            border-top: 2px solid var(--card-bg);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .popup-overlay {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .popup-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .popup-content {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .popup-overlay.show .popup-content {
+            transform: scale(1);
+        }
+
+        .popup-header {
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .event-title {
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
+            font-weight: 900;
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+            color: var(--text-main);
+        }
+
+        .event-details p {
+            margin: 8px 0;
+            font-weight: 700;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: 0.3s;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 992px) {
+            header { height: auto; padding: 20px 5%; flex-direction: column; gap: 15px; }
+            nav { flex-wrap: wrap; justify-content: center; }
+        }
+
+        @media (max-width: 600px) {
+            .logo { font-size: 1.5rem; }
+            nav { gap: 8px; }
+            .nav-btn, .dropbtn, .btn-login { padding: 8px 12px; font-size: 0.65rem; }
+            .hero { padding: 60px 5%; }
+            .popup-content { padding: 30px 20px; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Halo Dunia!</h1>
-    <p>Website ini berhasil dijalankan di GitHub Pages.</p>
+
+    <header>
+        <a href="index.html" class="logo">RAKSARA.</a>
+        <nav>
+            <a href="index.html" class="nav-btn">Beranda</a>
+            <a href="tentangkami.html" class="nav-btn">Tentang</a>
+            <a href="koleksi.php" class="nav-btn">Koleksi</a>
+            <a href="event.html" class="nav-btn">Event</a>
+            <a href="interaksi.html" class="nav-btn">Interaksi</a>
+            <div class="dropdown">
+                <button class="dropbtn">Tugas &#9662;</button>
+                <div class="dropdown-content">
+                    <a href="kalkulator.php">Kalkulator</a>
+                    <a href="looping.php">Looping</a>
+                    <a href="database.html">Database</a>
+                </div>
+            </div>
+
+            <a href="login.php" class="btn-login">Login</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <!-- Tambahkan id="welcome-text" untuk target script tipe -->
+        <h1 id="welcome-text">WELCOME TO <br> RUANG AKSARA!</h1>
+        <h1>STAY <span>BOLD.</span></h1>
+    </section>
+
+    <!-- POP-UP ANNOUNCEMENT -->
+    <div id="announcementPopup" class="popup-overlay">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <div class="popup-header">PENGUMUMAN EVENT</div>
+            <h2 class="event-title">BEDAH BUKU:<br>"DUNIA DALAM AKSARA"</h2>
+            <div class="event-details">
+                <p>📅 25 Mei 2026</p>
+                <p>⏰ 14:00 - Selesai</p>
+                <p>📍 Ruang Baca Utama (Lantai 2)</p>
+            </div>
+            <a href="event.html" class="nav-btn" style="display: inline-block; text-align: center; margin-top: 25px; width: auto;">Lihat Detail</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 RUANG AKSARA - ARCHIVING THE FUTURE.
+    </footer>
+
+    <!-- JAVASCRIPT EFFECTS -->
+    <script>
+        // --- Efek Typewriter pada Teks Selamat Datang ---
+        const welcomeElement = document.getElementById('welcome-text');
+        const welcomeTextContent = welcomeElement.innerText; // Mengambil teks murni
+        welcomeElement.innerText = ''; // Kosongkan dulu teksnya
+
+        let charIndex = 0;
+        function typeWriter() {
+            if (charIndex < welcomeTextContent.length) {
+                // Mencari posisi <br> berdasarkan teks asli
+                if (welcomeTextContent.charAt(charIndex) === '\n') {
+                    welcomeElement.innerHTML += '<br>';
+                } else {
+                    welcomeElement.innerHTML += welcomeTextContent.charAt(charIndex);
+                }
+                charIndex++;
+                setTimeout(typeWriter, 100); // Kecepatan mengetik 100ms per huruf
+            }
+        }
+
+        // --- Logika Pop-up Announcement ---
+        const popup = document.getElementById('announcementPopup');
+
+        function showPopup() {
+            // Menggunakan class untuk animasi fade-in dan scale
+            popup.classList.add('show');
+        }
+
+        function closePopup() {
+            popup.classList.remove('show');
+        }
+
+        // --- Inisialisasi Halaman ---
+        window.addEventListener('load', () => {
+            // 1. Jalankan efek mengetik
+            typeWriter(); 
+            
+            // 2. Tampilkan pop-up setelah delay 2.5 detik
+            // (Memeberikan waktu agar efek mengetik selesai)
+            setTimeout(showPopup, 2500); 
+        });
+
+        // Menutup pop-up jika user mengklik di luar kotak pengumuman
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                closePopup();
+            }
+        });
+    </script>
+
 </body>
 </html>
