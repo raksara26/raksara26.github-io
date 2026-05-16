@@ -3,366 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruang Aksara</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Ruang Aksara | Cyber-Library</title>
     <style>
-        :root {
-            --bg-color: #0f0f0f;
-            --card-bg: #1a1a1a;
-            --accent-color: #00d4ff; 
-            --text-main: #ffffff;
-            --text-dim: #b3b3b3;
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            color: var(--text-main);
-            background-color: var(--bg-color);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color: #0a0a12;
+            color: #00f3ff;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(10, 10, 18, 0.9), rgba(10, 10, 18, 0.9)),
+                radial-gradient(#ff0055 1px, transparent 0),
+                radial-gradient(#00f3ff 1px, transparent 0);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            background-position: 0 0, 0 0, 20px 20px;
         }
 
+        /* Header & Navigation */
         header {
-            background: rgba(15, 15, 15, 0.95);
-            padding: 0 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid var(--card-bg);
-            height: 90px;
-            transition: 0.3s;
+            padding: 20px 50px;
+            border-bottom: 2px solid #ff0055;
+            box-shadow: 0 0 15px #ff0055;
+            background: rgba(10, 10, 18, 0.9);
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            color: var(--accent-color);
+            font-size: 24px;
+            font-weight: bold;
             text-transform: uppercase;
-            text-decoration: none;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
         }
 
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 12px; 
+        .logo span {
+            color: #ff0055;
+            text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
         }
 
-        .nav-btn, .dropbtn, .btn-login {
-            background: transparent;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 10px 18px;
+        nav a {
+            color: #00f3ff;
             text-decoration: none;
-            font-weight: 800;
+            margin-left: 20px;
+            font-weight: 500;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            border-radius: 4px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            font-family: inherit;
-            display: inline-block;
-            line-height: 1;
+            transition: 0.3s;
         }
 
-        .nav-btn:hover, .btn-login:hover {
-            background: var(--accent-color);
-            color: var(--bg-color);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        nav a:hover {
+            color: #ff0055;
+            text-shadow: 0 0 10px #ff0055;
         }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown::after {
-            content: "";
-            position: absolute;
-            bottom: -15px;
-            left: 0;
-            width: 100%;
-            height: 15px;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--card-bg);
-            min-width: 200px;
-            box-shadow: 0px 15px 35px rgba(0,0,0,0.8);
-            z-index: 1001;
-            top: calc(100% + 10px);
-            left: 0;
-            border: 1px solid var(--accent-color);
-            border-radius: 4px;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .dropdown:hover .dropbtn {
-            background: var(--accent-color);
-            color: var(--bg-color);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
-        }
-
-        .dropdown-content a {
-            color: var(--text-main);
-            padding: 14px 20px;
-            display: block;
-            text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: 0.2s;
-            border-left: 0px solid var(--accent-color);
-        }
-
-        .dropdown-content a:hover {
-            background-color: rgba(0, 212, 255, 0.1);
-            color: var(--accent-color);
-            padding-left: 25px;
-            border-left: 4px solid var(--accent-color);
-        }
-
+        /* Hero Section */
         .hero {
-            padding: 100px 5%;
+            height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            flex-grow: 1;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem); 
-            font-weight: 900;
-            margin: 0;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            min-height: 1.1em;
-        }
-        
-        .hero span {
-            color: var(--accent-color);
+            padding: 0 20px;
+            position: relative;
         }
 
+        .hero h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 20px #ff0055;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #00f3ff;
+            text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        /* Cyber Button */
+        .btn-cyber {
+            padding: 12px 30px;
+            border: 2px solid #00f3ff;
+            background: transparent;
+            color: #00f3ff;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            transition: 0.3s;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .btn-cyber:hover {
+            background: #00f3ff;
+            color: #0a0a12;
+            box-shadow: 0 0 25px #00f3ff;
+        }
+
+        /* Main Content / Book Feed */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-transform: uppercase;
+            border-left: 5px solid #ff0055;
+            padding-left: 15px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #00f3ff;
+        }
+
+        .grid-books {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        /* Cyber Card */
+        .card {
+            background: rgba(20, 20, 35, 0.8);
+            border: 1px solid #00f3ff;
+            padding: 20px;
+            border-radius: 0;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ff0055;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
+        }
+
+        .card::before {
+            content: 'DATA-LOG';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #0a0a12;
+            padding: 0 5px;
+            font-size: 0.7rem;
+            color: #ff0055;
+            letter-spacing: 1px;
+        }
+
+        .card h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: #8892b0;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid;
+        }
+
+        .available {
+            color: #00ff66;
+            border-color: #00ff66;
+            background: rgba(0, 255, 102, 0.1);
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 30px 5%;
-            border-top: 2px solid var(--card-bg);
-            color: var(--text-dim);
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .popup-overlay {
-            display: none; 
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .popup-overlay.show {
-            display: flex;
-            opacity: 1;
-        }
-
-        .popup-content {
-            background: var(--card-bg);
-            border: 2px solid var(--accent-color);
             padding: 40px;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 8px;
-            position: relative;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
-            text-align: center;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .popup-overlay.show .popup-content {
-            transform: scale(1);
-        }
-
-        .popup-header {
-            font-size: 0.75rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .event-title {
-            font-size: clamp(1.2rem, 5vw, 1.8rem);
-            font-weight: 900;
-            margin: 0 0 20px 0;
-            line-height: 1.2;
-            color: var(--text-main);
-        }
-
-        .event-details p {
-            margin: 8px 0;
-            font-weight: 700;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2rem;
-            color: var(--text-dim);
-            cursor: pointer;
-            transition: 0.3s;
-            line-height: 1;
-        }
-
-        .close-btn:hover {
-            color: var(--accent-color);
-        }
-
-        /* --- MEDIA QUERIES --- */
-        @media (max-width: 992px) {
-            header { height: auto; padding: 20px 5%; flex-direction: column; gap: 15px; }
-            nav { flex-wrap: wrap; justify-content: center; }
-        }
-
-        @media (max-width: 600px) {
-            .logo { font-size: 1.5rem; }
-            nav { gap: 8px; }
-            .nav-btn, .dropbtn, .btn-login { padding: 8px 12px; font-size: 0.65rem; }
-            .hero { padding: 60px 5%; }
-            .popup-content { padding: 30px 20px; }
+            border-top: 1px solid rgba(0, 243, 255, 0.3);
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: #8892b0;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header / Navbar -->
     <header>
-        <a href="index.html" class="logo">RAKSARA.</a>
+        <div class="logo">Ruang<span>Aksara</span></div>
         <nav>
-            <a href="index.html" class="nav-btn">Beranda</a>
-            <a href="tentangkami.html" class="nav-btn">Tentang</a>
-            <a href="koleksi.php" class="nav-btn">Koleksi</a>
-            <a href="event.html" class="nav-btn">Event</a>
-            <a href="interaksi.html" class="nav-btn">Interaksi</a>
-            <div class="dropdown">
-                <button class="dropbtn">Tugas &#9662;</button>
-                <div class="dropdown-content">
-                    <a href="kalkulator.php">Kalkulator</a>
-                    <a href="looping.php">Looping</a>
-                    <a href="database.html">Database</a>
-                </div>
-            </div>
-
-            <a href="login.php" class="btn-login">Login</a>
+            <a href="#home">Beranda</a>
+            <a href="#arsip">Arsip Data</a>
+            <a href="#Kategori">Kategori</a>
+            <a href="#terminal">Terminal</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <!-- Tambahkan id="welcome-text" untuk target script tipe -->
-        <h1 id="welcome-text">WELCOME TO <br> RUANG AKSARA!</h1>
-        <h1>STAY <span>BOLD.</span></h1>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>RUANG AKSARA</h1>
+        <p>Selamat datang di repositori data masa depan. Tempat pelarian informasi, distopia literasi, dan enkripsi pengetahuan terlengkap di Cyber-City.</p>
+        <button class="btn-cyber">Akses Dek Penejelajah</button>
     </section>
 
-    <!-- POP-UP ANNOUNCEMENT -->
-    <div id="announcementPopup" class="popup-overlay">
-        <div class="popup-content">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
-            <div class="popup-header">PENGUMUMAN EVENT</div>
-            <h2 class="event-title">BEDAH BUKU:<br>"DUNIA DALAM AKSARA"</h2>
-            <div class="event-details">
-                <p>📅 25 Mei 2026</p>
-                <p>⏰ 14:00 - Selesai</p>
-                <p>📍 Ruang Baca Utama (Lantai 2)</p>
+    <!-- Main Content -->
+    <div class="container">
+        <h2 class="section-title">Transmisi Data Terbaru</h2>
+        
+        <div class="grid-books">
+            <!-- Card 1 -->
+            <div class="card">
+                <h3>Neuromancer 2077</h3>
+                <p>Kisah tentang peretas konsol usang yang mencoba menembus pertahanan kecerdasan buatan korporasi raksasa.</p>
+                <span class="status available">Tersedia untuk diunduh</span>
             </div>
-            <a href="event.html" class="nav-btn" style="display: inline-block; text-align: center; margin-top: 25px; width: auto;">Lihat Detail</a>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <h3>Etika AI & Perang Siber</h3>
+                <p>Manifesto digital mengenai batas-batas kesadaran sintetis dalam sistem persenjataan militer otomatis.</p>
+                <span class="status available">Tersedia untuk diunduh</span>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <h3>Arsitektur Neon Grid</h3>
+                <p>Panduan teknis membangun jaringan virtual terenkripsi agar terhindar dari pemindaian polisi siber.</p>
+                <span class="status available">Tersedia untuk diunduh</span>
+            </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
-        &copy; 2026 RUANG AKSARA - ARCHIVING THE FUTURE.
+        <p>&copy; 2026 RUANG AKSARA // Jaringan Informasi Terenkripsi. Hak Cipta Dilindungi Korporasi.</p>
     </footer>
-
-    <!-- JAVASCRIPT EFFECTS -->
-    <script>
-        // --- Efek Typewriter pada Teks Selamat Datang ---
-        const welcomeElement = document.getElementById('welcome-text');
-        const welcomeTextContent = welcomeElement.innerText; // Mengambil teks murni
-        welcomeElement.innerText = ''; // Kosongkan dulu teksnya
-
-        let charIndex = 0;
-        function typeWriter() {
-            if (charIndex < welcomeTextContent.length) {
-                // Mencari posisi <br> berdasarkan teks asli
-                if (welcomeTextContent.charAt(charIndex) === '\n') {
-                    welcomeElement.innerHTML += '<br>';
-                } else {
-                    welcomeElement.innerHTML += welcomeTextContent.charAt(charIndex);
-                }
-                charIndex++;
-                setTimeout(typeWriter, 100); // Kecepatan mengetik 100ms per huruf
-            }
-        }
-
-        // --- Logika Pop-up Announcement ---
-        const popup = document.getElementById('announcementPopup');
-
-        function showPopup() {
-            // Menggunakan class untuk animasi fade-in dan scale
-            popup.classList.add('show');
-        }
-
-        function closePopup() {
-            popup.classList.remove('show');
-        }
-
-        // --- Inisialisasi Halaman ---
-        window.addEventListener('load', () => {
-            // 1. Jalankan efek mengetik
-            typeWriter(); 
-            
-            // 2. Tampilkan pop-up setelah delay 2.5 detik
-            // (Memeberikan waktu agar efek mengetik selesai)
-            setTimeout(showPopup, 2500); 
-        });
-
-        // Menutup pop-up jika user mengklik di luar kotak pengumuman
-        popup.addEventListener('click', (e) => {
-            if (e.target === popup) {
-                closePopup();
-            }
-        });
-    </script>
 
 </body>
 </html>
